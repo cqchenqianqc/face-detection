@@ -1,0 +1,18 @@
+1.运行的容器：
+01cc69a8b798   --将其中的训练集的颜色改为了BGR图片：
+/root/anaconda3/lib/python3.7/site-packages/torchvision/datasets/folder.py下的：
+def pil_loader(path):
+	with open(path,'rb') as f:
+		img=Image.open(f)
+		return img.convert('RGB')
+
+
+改为：def pil_loader(path):
+	with open(path,'rb') as f:
+		img=cv2.imread(path)
+		img=Image.fromarray(img)
+		return img
+
+2.训练指令：python3 train.py
+
+其中--resume_weights 可以修改为None，或者dafault=‘./weights/best_liveness_mobilenetv2.pth.tar’
